@@ -10,9 +10,36 @@ var firebaseConfig = {
     appId: "1:277233175036:web:7646fc8e415a629a9b4a79",
     measurementId: "G-DTL7M26VH4"
   };
+  
+
+  export const createUserProfileDocument=async (userAuth,additionalData)=>{
+    if (!userAuth) return ;
+
+ 
+    const userRef=firestore.doc(`user/${userAuth.uid}`)
+    
+    const userSnapshot=await userRef.get()
+
+    if(!userSnapshot.exists){
+      const {displayName,email}=userAuth;
+      const createdAt=new Date()
+      try {
+        await userRef.set({
+          displayName,
+          email,
+          createdAt,
+          ...additionalData
+        })
+      } catch (error) { 
+        console.log(`Error At User Auth:${error}`)
+      }
+
+    }
+return userRef
+  }
   firebase.initializeApp(firebaseConfig)
 
-  export const auth=firebase.auth()
+ export const auth=firebase.auth()
   export const firestore=firebase.firestore()
 
   const provider=new firebase.auth.GoogleAuthProvider();
