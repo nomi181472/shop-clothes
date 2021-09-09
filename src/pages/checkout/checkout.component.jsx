@@ -34,4 +34,5 @@ const mapStateToProps=createStructuredSelector(
         total:selectCostTotal
     }
 )
+
 export default connect(mapStateToProps )(CheckoutPage)
