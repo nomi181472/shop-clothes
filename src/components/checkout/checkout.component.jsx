@@ -1,6 +1,7 @@
 import { connect } from "react-redux"
 import { addItem, clearItemFromCart } from "../../redux/cart/cart.action"
 import { removeItemFromCart } from "../../redux/cart/cart.utils"
+
 import "./checkout-item.styles.scss"
 
 
@@ -26,6 +27,7 @@ const CheckoutItem=({cartItem,clearItem,addingItem,removingItem})=>{
     <div className="remove-button" onClick={()=>clearItem(cartItem)}>
 &#10005;
     </div>
+ 
     </div>
     )}
 const mapDispatchToProps=dispatch=>({
